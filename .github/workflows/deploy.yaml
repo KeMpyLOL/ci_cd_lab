@@ -22,3 +22,14 @@ jobs:
 
       - name: Compile binary
         run: go build -o myapp
+
+      - name: Install dependencies
+        run: go mod download
+
+      # TODO 01 - Add a step to run tests
+      - name: Run tests
+        run: #TODO
+
+  compile:
+    [...]
+    # TODO 02 - Make sure that the `test` job is run before `compile`
