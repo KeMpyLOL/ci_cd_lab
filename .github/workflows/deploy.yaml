@@ -6,7 +6,8 @@ on:
       - main
 
 jobs:
-  compile:
+
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,18 +21,12 @@ jobs:
       - name: Install dependencies
         run: go mod download
 
-      - name: Compile binary
-        run: go build -o myapp
-
-      - name: Install dependencies
-        run: go mod download
-
       # TODO 01 - Add a step to run tests
       - name: Run tests
-        run: go test./...
+        run: go test ./...
 
   compile:
-    # TODO 02 - Make sure that the `test` job is run before `compile`
+    needs: test   # TODO 02 - Compile rulează doar dacă test a trecut
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -44,3 +39,5 @@ jobs:
 
       - name: Build binary
         run: go build -o app
+
+
